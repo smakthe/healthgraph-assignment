@@ -1,10 +1,10 @@
-<%= form_for @comment do |f| %>
+<%= form_for @comment, remote: true do |f| %>
 
   <div class="form-group">
     <%= f.text_area :content, :class => 'form-control', rows: 3 %>
     <%= f.hidden_field :post_id, value: @comment.post_id %>
   </div>
   <%= f.submit "Post", :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")), comments_path, :class => 'btn btn-default' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")), post_path(@comment.post), :class => 'btn btn-default' %>
 
 <% end %>

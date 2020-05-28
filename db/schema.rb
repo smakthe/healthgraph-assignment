@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_010441) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.boolean "trashed"
+    t.boolean "trashed", default: false
     t.bigint "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -32,5 +32,5 @@ ActiveRecord::Schema.define(version: 2020_05_28_010441) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "comments", "posts", column: "post_id"
+  add_foreign_key "comments", "posts"
 end

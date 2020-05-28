@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="navbar-header">
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'Trash<i class="glyphicon glyphicon-trash"></i>'.html_safe, trash_index_path, :class=> 'btn btn-info' %></li>
+        </ul>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
