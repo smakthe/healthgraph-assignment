@@ -15,7 +15,7 @@ class CommentsTest < ApplicationSystemTestCase
     click_on "New Comment"
 
     fill_in "Content", with: @comment.content
-    fill_in "Posts", with: @comment.posts_id
+    fill_in "Posts", with: @comment.post_id
     check "Trashed" if @comment.trashed
     click_on "Create Comment"
 
@@ -28,7 +28,7 @@ class CommentsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Content", with: @comment.content
-    fill_in "Posts", with: @comment.posts_id
+    fill_in "Posts", with: @comment.post_id
     check "Trashed" if @comment.trashed
     click_on "Update Comment"
 

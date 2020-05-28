@@ -7,8 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:trashed) %></th>
-      <th><%= model_class.human_attribute_name(:posts_id) %></th>
+      <th><%= model_class.human_attribute_name(:post_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,8 +17,7 @@
       <tr>
         <td><%= link_to comment.id, comment_path(comment) %></td>
         <td><%= comment.content %></td>
-        <td><%= comment.trashed %></td>
-        <td><%= comment.posts_id %></td>
+        <td><%= comment.post_id %></td>
         <td><%=l comment.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
