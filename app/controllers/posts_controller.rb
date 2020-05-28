@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @comment = @post.comments.new
   end
 
   # GET /posts/new
@@ -25,9 +26,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @comment = @post.comments.new(comment_params)
 
     respond_to do |format|
       if @post.save
+        @comment.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -65,10 +68,15 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      @comments = @post.comments
     end
 
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :body, :trashed)
+    end
+
+    def comment_params
+      params.require(:comment).permit(:content, :trashed, :post_id)
     end
 end
