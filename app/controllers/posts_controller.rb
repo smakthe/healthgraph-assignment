@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :create_comment, :edit, :update, :update_comment, :trash, :destroy]
+  before_action :set_post, only: [:show, :create_comment, :edit, :update, :trash, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -20,6 +20,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+
   end
 
   # POST /posts
@@ -67,23 +68,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def update_comment
-    respond_to do |format|
-      if @comment.update(post_params)
-        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     if params[:comment_id]
-      @comments.find(params[:comment_id]).destroy
+      @post.comments.find(params[:comment_id]).destroy
       respond_to do |format|
         format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
         format.json { head :no_content }
@@ -101,7 +90,6 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
-      @comments = @post.comments
     end
 
     # Only allow a list of trusted parameters through.
