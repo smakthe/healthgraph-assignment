@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :create_comment, :edit, :update, :update_comment, :trash, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -26,11 +26,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @comment = @post.comments.new(comment_params)
 
     respond_to do |format|
       if @post.save
-        @comment.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -40,12 +38,39 @@ class PostsController < ApplicationController
     end
   end
 
+  def create_comment
+    @comment = Comment.new(comment_params)
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @post, notice: 'Comment was successfully posted.' }
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_comment
+    respond_to do |format|
+      if @comment.update(post_params)
+        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

@@ -14,7 +14,8 @@
   </thead>
   <tbody>
     <% @posts.each do |post| %>
-      <tr>
+      <% unless post.trashed %>
+        <tr>
         <td><%= link_to post.id, post_path(post) %></td>
         <td><%= post.title %></td>
         <td><%= post.body %></td>
@@ -29,6 +30,7 @@
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

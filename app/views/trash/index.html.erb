@@ -1,0 +1,22 @@
+<h1> Posts </h1>
+<table class="table table-striped">
+	<% @posts.each do |post| %>
+		<tr>
+			<td><%= post.id %></td>
+			<td><%= post.title %></td>
+			<td><%= link_to 'Restore<i class="material-icons">restore</i>'.html_safe, trash_restore_path(id: post.id, class: post.class), method: :post %></td>
+		</tr>
+	<% end %>
+</table>
+<hr>
+
+<h1> Comments </h1>
+<table class="table table-striped">
+	<% @comments.each do |comment| %>
+		<tr>
+			<td><%= comment.id %></td>
+			<td><%= comment.content %></td>
+			<td><%= link_to 'Restore<i class="material-icons">restore</i>'.html_safe, trash_restore_path(id: comment.id, class: comment.class), method: :post %></td>
+		</tr>
+	<% end %>
+</table>
